@@ -2,7 +2,7 @@ Resources kuliah Sinyal Sistem Teknik Fisika ITS
 
 Content:
 
-- Slide : berisi slide kuliah
+- slide : berisi slide kuliah
 - code  : berisi code Matlab/Octave
-- Pict  : berisi file-file gambar (.eps, .fig, .svg, etc)
-- Prakt : berisi modul praktikum
+- pict  : berisi file-file gambar (.eps, .fig, .svg, etc)
+- prakt : berisi modul praktikum
