@@ -11,7 +11,7 @@ subplot(311); stem(n,x);
 title('x[n]');
 
 % downspaled 2
-xd=downsample(x,2);one ok rock a thousand miles ( vanessa carlton ) at yokohama stadium
+xd=downsample(x,2);
 nd=-10:10;
 
 subplot(312); stem(nd,xd);
