@@ -1,6 +1,6 @@
 % Praktikum1c.m
 
-% solution with z-transform
+% Solving with z-transform
 syms z, 
 Gz=z/(z^2-(1/4)*z-1/8);     % system function
 g = iztrans(Gz)             % symbolic inverse z transform
@@ -23,12 +23,13 @@ for m=NA:NA+N-1             % To solve the difference equation iteratively
     y(m)= -A(2:NA)*y(m-[1:NA-1]).' +B*xn(m-NA+[1:NB]).';
 end
     
-y = y(NA:NA+N-1);           % resonse
+y = y(NA:NA+N-1);           % response
 
-% Using filter()
+% Solving using filter()
 yp=[0 0]; xp=0;             % Initial condition from past history
 w0=filtic(B,A,yp,xp);    
 yn = filter(B,A,xn,w0);      % respon with zero initial condition by default
+
 subplot(311);   stem(nn,gn)
 subplot(312);   stem(nn,y,'r')
 subplot(313);   stem(nn,yn(1:N),'k.')
