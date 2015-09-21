@@ -10,3 +10,4 @@ D = 4196;                   % Echo parameters
 b = [1,zeros(1,D),alpha];   % Filter parameters
 x = filter(b,1,y);          % Generate sound plus its echo
 sound(x,Fs);                % Play sound with echo
+% wavwrite(x,Fs,'../sinyal/gema.wav') % menyimpan gema.wav dlm sinyal
