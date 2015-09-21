@@ -72,16 +72,17 @@ Tujuan :
 \end_layout
 
 \begin_layout Enumerate
-Mahasiswa memahami sifat-sifat dasar sistem LTI
+Mahasiswa memahami sifat-sifat dasar sistem LTI dan konvolusi
 \end_layout
 
 \begin_layout Enumerate
 Mahasiswa mampu menentukan respon sistem: zero input, zero state, impulse
- response, step response
+ response, step response.
 \end_layout
 
 \begin_layout Enumerate
-Mahasiswa mampu melakukan operasi konvolusi
+Mahasiswa mampu melakukan operasi perhitungan sistem LTI dan konvolusi,
+ mendemokan dan membuat laporan secara sistematis.
 \end_layout
 
 \begin_layout Section
@@ -490,17 +491,17 @@ end
 
 \begin_layout Plain Layout
 
-B= [1 0];  A= [1 -1/4 -1/8]; % numerator/denominator 
+B = [1 0];  A = [1 -1/4 -1/8]; % numerator/denominator 
 \end_layout
 
 \begin_layout Plain Layout
 
-NB=length(B);  
+NB = length(B);  
 \end_layout
 
 \begin_layout Plain Layout
 
-NA=length(A); 
+NA = length(A); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -520,13 +521,13 @@ y = zeros(1,NA-1);          % Initial condition
 
 \begin_layout Plain Layout
 
-for m=NA:NA+N-1             % To solve the difference equation iteratively
+for m = NA:NA+N-1             % To solve the difference equation iteratively
      
 \end_layout
 
 \begin_layout Plain Layout
 
-	y(m)= -A(2:NA)*y(m-[1:NA-1]).' +B*xn(m-NA+[1:NB]).'; 
+	y(m) = -A(2:NA)*y(m-[1:NA-1]).' +B*xn(m-NA+[1:NB]).'; 
 \end_layout
 
 \begin_layout Plain Layout
@@ -554,12 +555,12 @@ y = y(NA:NA+N-1);           % response
 
 \begin_layout Plain Layout
 
-yp=[0 0]; xp=0;           % Initial condition from past history 
+yp = [0 0]; xp=0;           % Initial condition from past history 
 \end_layout
 
 \begin_layout Plain Layout
 
-w0=filtic(B,A,yp,xp);     
+w0 = filtic(B,A,yp,xp);     
 \end_layout
 
 \begin_layout Plain Layout
@@ -766,11 +767,19 @@ Dirinya sendiri
 \end_layout
 
 \begin_layout Enumerate
-h[n] = x(n) = (0.9)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+h[n] = x(n) = (0.9)
+\begin_inset Formula $^{n}$
+\end_inset
+
+[u(n)-u(n-15)]; dimana 0 < n < 15 
 \end_layout
 
 \begin_layout Enumerate
-h[n] = x(n) = (1.5)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+h[n] = x(n) = (1.5)
+\begin_inset Formula $^{n}$
+\end_inset
+
+[u(n)-u(n-15)]; dimana 0 < n < 15 
 \end_layout
 
 \end_deeper
@@ -778,13 +787,13 @@ h[n] = x(n) = (1.5)n[u(n)-u(n-15)]; dimana 0 < n < 15
 Pelajari dan run file gema.m dalam folder code.
  Di dalam folder sinyal, telah ada file gema.wav yang merupakan file hasil
  proses dari gema.m.
- Dengan kedua file tsb (wav dan .m), buat sebuah sistem (filter) untuk mengembali
+ Dengan kedua file tsb (.wav dan .m), buat sebuah sistem (filter) untuk mengembali
 kan file gema.wav menjadi file asli tanpa gema, beri nama file anda dengan:
  gema_removed.wav
 \end_layout
 
 \begin_layout Enumerate
-Kesimpulan apa yang diperoleh dari praktikum ini ?
+Kesimpulan apa yang diperoleh dari praktikum ini ? Jelaskan secara sistematis.
 \end_layout
 
 \end_body
