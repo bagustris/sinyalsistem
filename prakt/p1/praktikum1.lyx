@@ -311,7 +311,190 @@ subplot(4,1,4); stem(n3, y2);
 \end_layout
 
 \begin_layout Section
-Step response
+Input dan Step Response
+\end_layout
+
+\begin_layout Standard
+Diberikian sebuah sistem sebagai berikut :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y(n)\text{−}y(n\text{−}1)+0.9y(n\text{−}2)=x(n)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Hitung dan gambar impulse response h(n) pada n=-20,...,100
+\end_layout
+
+\begin_layout Enumerate
+Hitung dan gambar step response u(n) pada n=-20,...,100
+\end_layout
+
+\begin_layout Enumerate
+Apakah sistem dengan impulse response h(n) stabil?
+\end_layout
+
+\begin_layout Subsection*
+Matlab
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+addpath('../../code') 
+\end_layout
+
+\begin_layout Plain Layout
+
+b = [1];            % num 
+\end_layout
+
+\begin_layout Plain Layout
+
+a=[1, -1, 0.9];     % denum 
+\end_layout
+
+\begin_layout Plain Layout
+
+n = [-20:120];      % time interval
+\end_layout
+
+\begin_layout Plain Layout
+
+% impulse response 
+\end_layout
+
+\begin_layout Plain Layout
+
+h = impz(b,a,n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(2,1,1); stem(n,h); 
+\end_layout
+
+\begin_layout Plain Layout
+
+title('Impulse Response'); xlabel('n'); ylabel('h(n)')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% step response 
+\end_layout
+
+\begin_layout Plain Layout
+
+x = stepseq(0,-20,120); 
+\end_layout
+
+\begin_layout Plain Layout
+
+s = filter(b,a,x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(2,1,2); stem(n,s) 
+\end_layout
+
+\begin_layout Plain Layout
+
+title('Step Response'); xlabel('n'); ylabel('s(n)')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% stability 
+\end_layout
+
+\begin_layout Plain Layout
+
+stable=sum(abs(h)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+z=roots(a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+magz=abs(z)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Tugas Praktikum
+\end_layout
+
+\begin_layout Enumerate
+Tentukan zero-state input persamaan dibawah ini 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+y[n+1] – 2y[n] = x[n] 
+\end_layout
+
+\begin_layout Enumerate
+y[n+2] – 1.56y[n+1] – 0.81 y[n] = x[n+1] + 3x[n] 
+\end_layout
+
+\begin_layout Enumerate
+y[n] – 0.6y[n-1] – 0.16y[n-2] = 5x[n] 
+\end_layout
+
+\begin_layout Standard
+Secara manual (hint : gunakan persamaan differential) dan memakai Matlab.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Konvolusikan ketiga persamaan diatas dengan (memakai Matlab) 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Dirinya sendiri 
+\end_layout
+
+\begin_layout Enumerate
+h[n] = x(n) = (0.9)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+\end_layout
+
+\begin_layout Enumerate
+h[n] = x(n) = (1.5)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Kesimpulan apa yang diperoleh dari kedua percobaan diatas ?
 \end_layout
 
 \end_body
