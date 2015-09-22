@@ -350,6 +350,247 @@ filter
 .
 \end_layout
 
+\begin_layout Section*
+Solusi dengan Z-transform
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+G[z]=\frac{Y[z]}{X[z]}=\frac{z^{-1}}{1-(1/4)z^{-1}-(1/8)z^{-2}}=\frac{z}{(z-1/2)(z+1/4)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g[n]=Z^{-1}\left\{ \frac{z}{(z-1/2)(z+1/4)}\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=Z^{-1}\left\{ \frac{4}{3}\left(\frac{z}{(z-1/2)}\right)\left(\frac{z}{(z+1/4)}\right)\right\} =\frac{4}{3}\left(\left(\frac{1}{2}\right)^{n}-\left(-\frac{1}{4}\right)^{n}u_{s}[n]\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Solusi dengan difference equation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y[n]=y[n\text{−}1]+y[n\text{−}2]+x[n\text{−}1]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where y[−1] = y[−2] = 0 and x[n − 1] = 
+\begin_inset Formula $\delta$
+\end_inset
+
+[n − 1] = 1 only for n = 1.
+\end_layout
+
+\begin_layout Standard
+n = 0: y[0] = (1/4)y[−1] + (1/8)y[−2] + x[−1] = 0 − 0 + 0 = 0
+\end_layout
+
+\begin_layout Standard
+n = 1: y[1] = (1/4)y[0] + (1/8)y[−1] + x[0] = 0 − 0 + 1 = 1 
+\end_layout
+
+\begin_layout Standard
+n = 2: y[2] = (1/4)y[1] + (1/8)y[0] + x[1] = 1/4 − 0 + 0 = 1/4 
+\end_layout
+
+\begin_layout Standard
+n = 3: y[3] = (1/4)y[2] + (1/8)y[1] + x[2] = 1/16 + 1/8 + 0 = 3/16
+\end_layout
+
+\begin_layout Subsection*
+Matlab
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+% Solving with z-transform 
+\end_layout
+
+\begin_layout Plain Layout
+
+syms z,  
+\end_layout
+
+\begin_layout Plain Layout
+
+Gz=z/(z^2-(1/4)*z-1/8);     % system function 
+\end_layout
+
+\begin_layout Plain Layout
+
+g = iztrans(Gz)             % symbolic inverse z transform 
+\end_layout
+
+\begin_layout Plain Layout
+
+N=16;  nn=[0:N-1];
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for n=0:N-1     
+\end_layout
+
+\begin_layout Plain Layout
+
+	gn(n+1) = eval(g);  
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Solving the difference equation with the unit impulse input 
+\end_layout
+
+\begin_layout Plain Layout
+
+B= [1 0];  A= [1 -1/4 -1/8]; % numerator/denominator 
+\end_layout
+
+\begin_layout Plain Layout
+
+NB=length(B);  
+\end_layout
+
+\begin_layout Plain Layout
+
+NA=length(A); 
+\end_layout
+
+\begin_layout Plain Layout
+
+xn = [0 1 zeros(1,N-1+NB)]; % x[n-1] impulse input delayed by one sample
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+y = zeros(1,NA-1);          % Initial condition
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for m=NA:NA+N-1             % To solve the difference equation iteratively
+     
+\end_layout
+
+\begin_layout Plain Layout
+
+	y(m)= -A(2:NA)*y(m-[1:NA-1]).' +B*xn(m-NA+[1:NB]).'; 
+\end_layout
+
+\begin_layout Plain Layout
+
+end      
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+y = y(NA:NA+N-1);           % response
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% Solving using filter() 
+\end_layout
+
+\begin_layout Plain Layout
+
+yp=[0 0]; xp=0;           % Initial condition from past history 
+\end_layout
+
+\begin_layout Plain Layout
+
+w0=filtic(B,A,yp,xp);     
+\end_layout
+
+\begin_layout Plain Layout
+
+yn = filter(B,A,xn,w0);      	% respon with zero initial condition by default
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(311);   stem(nn,gn) 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(312);   stem(nn,y,'r') 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(313);   stem(nn,yn(1:N),'k.')
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Input dan Step Response
 \end_layout
@@ -534,7 +775,16 @@ h[n] = x(n) = (1.5)n[u(n)-u(n-15)]; dimana 0 < n < 15
 
 \end_deeper
 \begin_layout Enumerate
-Kesimpulan apa yang diperoleh dari kedua percobaan diatas ?
+Pelajari dan run file gema.m dalam folder code.
+ Di dalam folder sinyal, telah ada file gema.wav yang merupakan file hasil
+ proses dari gema.m.
+ Dengan kedua file tsb (wav dan .m), buat sebuah sistem (filter) untuk mengembali
+kan file gema.wav menjadi file asli tanpa gema, beri nama file anda dengan:
+ gema_removed.wav
+\end_layout
+
+\begin_layout Enumerate
+Kesimpulan apa yang diperoleh dari praktikum ini ?
 \end_layout
 
 \end_body

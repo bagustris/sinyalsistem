@@ -17,4 +17,4 @@ end
 stem(y);
 xlabel('n');
 ylabel('y(n)');
-title('system output y(n)');
+title('System output y(n)');
