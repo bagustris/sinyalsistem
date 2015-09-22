@@ -21,7 +21,7 @@ y2 = conv (x,h);
 n3 = length(n1)+length(n2)-1;
 n4 = 0:n3-1;
 
-subplot(4,1,1); stem(n1,h);
-subplot(4,1,2); stem(n2,x);
+subplot(4,1,1); stem(n2,x);
+subplot(4,1,2); stem(n1,h);
 subplot(4,1,3); stem(n4,y1);
 subplot(4,1,4); stem(n4,y2);

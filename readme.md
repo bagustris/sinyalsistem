@@ -1,4 +1,4 @@
-Resources kuliah Sinyal Sistem Teknik Fisika ITS
+<h2> Resources kuliah Sinyal Sistem Teknik Fisika ITS </h2>
 
 Content:
 
@@ -6,6 +6,7 @@ Content:
 - code  : berisi code Matlab/Octave
 - pict  : berisi file-file gambar (.eps, .fig, .svg, etc)
 - prakt : berisi modul praktikum
+- sinyal: berisi contoh sinyal yang digunakan (suara, gambar, video)
 
 <h3> UPLOAD PRAKTIKUM </h3>
 - Upload praktikum 1 dalam format NRP.zip <a href="https://drive.google.com/folderview?id=0Bwuig_1_pjQhTlljbDgyUGZaSlk&usp=sharing"> disini </a>.
