@@ -1,6 +1,6 @@
 <h2> Resources kuliah Sinyal Sistem Teknik Fisika ITS </h2>
 
-Content:
+<h3> Content: </h3>
 
 - slide : berisi slide kuliah
 - code  : berisi code Matlab/Octave
