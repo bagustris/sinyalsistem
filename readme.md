@@ -13,3 +13,4 @@ Content:
 
 <h3> BACAAN </h3>
 - <a href="https://en.wikibooks.org/wiki/Signals_and_Systems/Time_Domain_Analysis/System_Response"> Wikibooks tentang Zero-input, Zero-state, Impulse Response, dan Step response </a>
+- <a href="http://indico.ictp.it/event/a14296/session/167/contribution/803/material/video/"> FFT, Convolution, Correlation and Image Processing </a>
