@@ -21,4 +21,5 @@ for t = 1:10
 end
 
 z=conv(h,x);
-figure(2); stem(z)
+figure(2); 
+stem(z)
