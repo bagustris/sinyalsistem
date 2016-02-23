@@ -1,21 +1,27 @@
-%Konvolusi sinyal sinus bernoise dengan raised cosine;
-n=-7.9:.5:8.1;
-y=sin(4*pi*n/8)./(4*pi*n/8);
-figure(1);
-plot(y,'linewidth',2)
-t=0.1:.1:8;
-x=sin(2*pi*t/4);
-figure(2);
-plot(x,'linewidth',2)
+%Fenomena Gibb
 
-%Tambahkan noise pada sinyal sinus.
-t=0.1:.1:8;
-x_n=sin(2*pi*t/4)+0.5*randn*sin(2*pi*10*t/4) + ...
-    0.2*randn*sin(2*pi*12*t/4);
-figure(3);
-plot(x_n,'linewidth',2)
+clear all; clc
+t=linspace(-2,2,2000);
+u=linspace(-2,2,2000);
+sq=[zeros(1,500),2*ones(1,1000),zeros(1,500)];
+k=2;
+% N=[1,3,7,19,49,70];
+N=[1,10,100,1000,10000,100000];
 
-%Konvolusikan keduanya
-xy=conv(x_n,y);
-figure(4);
-plot(xy,'linewidth',2)
+for n=1:6;
+an=[];
+for m=1:N(n)
+    an=[an,2*k*sin(m*pi/2)/(m*pi)];
+end;
+
+fN=k/2;
+
+for m=1:N(n)
+    		fN=fN+an(m)*cos(m*pi*t/2);
+end;
+nq=int2str(N(n));
+subplot(3,2,n),plot(u,sq,'r','LineWidth',2);
+hold on;
+plot(t,fN,'LineWidth',2); hold off; axis([-2 2 -0.5 2.5]);grid;
+xlabel('Time'), ylabel('y_N(t)');title(['N= ',nq]);
+end;

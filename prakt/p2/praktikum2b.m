@@ -1,25 +1,67 @@
-% praktikum 2b.m : Konvolusi dan FIR
-
-clear all;
-T=1000;
-LPF_01=fir1(16,0.2,'low')
-t=1/T:1/T:1;
-y=sin(2*pi*t);
-tt=length(y);
-nois=0.1*randn(1,tt);
-y_n = y + nois;
-subplot(2,1,1);
-plot(t,y_n,'linewidth',2)
-axis([0 1.05 -1.5 1.5])
-xlabel('Waktu (dt)')
-grid on
-
-% konvolusi FIR filter dengan sinyal dan noise
-y_filter=conv(y_n,LPF_01);
-subplot(2,1,2);
-t_yfil=length(y_filter);
-t=1/T:1/T:t_yfil/T;
-plot(t,y_filter,'linewidth',2)
-axis([0 1.05 -1.5 1.5])
-xlabel('Waktu (dt)')
-grid on
+% Filename: praktikum4b.m
+%
+% Description: m-file to compute and plot the truncated Fourier
+%              Series representation of a square wave.
+% *** Plot truncatated FS for various numbers of terms. ***
+clear;               	% clear matlab's memory
+figure(1); clf; 		% open and clear figure 1
+To = 2; wo = 2*pi/To; 	% fundamental period and frequency
+D0 = 0.5;           	% signal offset
+t = -2:0.01:4;       	% time over which we'll plot signal
+N = [1 5 10 50]; 		% +/- values at which we'll truncate FS
+for i = 1:4,           	% compute truncated FS for above N values
+   f = D0*ones(size(t)); % start out with DC bias term
+   for n = -N(i):-1,                        % loop over negative n
+      Dn = (1 - exp(-j*n*pi))/(j*2*pi*n);   % Fourier coefficient
+      f = f + real(Dn*exp(j*n*wo*t));       % add FS terms
+   end;
+   
+   for n = 1:N(i),                          % loop over positive n
+      Dn = (1 - exp(-j*n*pi))/(j*2*pi*n);   % Fourier coefficient
+      f = f + real(Dn*exp(j*n*wo*t));       % add FS terms
+   end;
+   
+subplot(2,2,i); 	% plot truncated FS representation of f(t)
+plot(t,f);          % and actual signal
+hold on;
+plot([-2 -1 -1 0 0 1 1 2 2 3 3 4 4],[1 1 0 0 1 1 0 0 1 1 0 0 1],':');
+hold off;
+xlabel('t ');
+ylabel('f(t)');
+titlevec = ['Truncated f(t) FS for n = ' num2str(-N(i)),',..,',num2str(N(i))];
+title(titlevec);  
+end;
+ 
+% *** Plot exponential magnitude and phase spectra for 1st 4 harmonics
+clear;        	% clear matlab's memory
+figure(2); clf;  	% open and clear figure 2
+To = 2; wo = 2*pi/To;  	% fundamental period and frequency
+D0 = 0.5;     		% signal offset, 0 frequency term
+i = 1;               	% vector index to help store Dn and w
+ 
+for n = -4:-1,      	% loop over negative n
+   Dn(i) = (1 - exp(-j*n*pi))/(j*2*pi*n); %Compute&store fouriercoef.
+   w(i) = n*wo;         	% store associated frequency
+    i = i + 1;              	% increment vector index   
+end;
+ 
+Dn(i) = D0; w(i) = 0;       	% store 0 frequency terms                           
+i = i + 1;                  	% increment vector index
+ 
+for n = 1:4,               	% loop over positive n
+   Dn(i) = (1 - exp(-j*n*pi))/(j*2*pi*n); %Compute&store Fourier coef.
+   w(i) = n*wo;                 % store associated frequency
+   i = i + 1;                   % increment vector index;
+end;
+   
+subplot(2,1,1);                 % plot magnitude spectrum of f(t)
+stem(w,abs(Dn),'filled');
+xlabel('\omega ');
+ylabel('|D_n|');
+title('Magnitude Spectrum of f(t) Showing First Four Harmonics');
+ 
+subplot(2,1,2);                 % plot phase spectrum of f(t)
+stem(w,angle(Dn),'filled');
+xlabel('\omega ');
+ylabel('\angle D_n ');
+title('Phase Spectrum of f(t) Showing First Four Harmonics');
