@@ -1,4 +1,0 @@
-- gambar sinyal speech diganti dengan bahasa indonesia >> saya suka si Baju merah, plot dengan SPTK
-- subbab 2.3 transformasi sinyal ditambah time reversal (pembalikan waktu)
-- integral kalkulus --> appendix
-
