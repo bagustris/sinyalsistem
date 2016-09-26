@@ -1,3 +1,4 @@
+% example of system
 n = 0:10;
 x = ones(size(n));
 x(1) = 0;
