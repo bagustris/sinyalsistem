@@ -1,5 +1,5 @@
-% convDemo2.m : Demo of convolution
-x = rand(1,10); % A random signal of length 10
+# convDemo2.m : Demo of convolution
+x = ones(1,10); % Unit step signal of length 10
 h = [0.5 0.5]; % An impulse response
 y = conv(x, h);% Convolution operation
 
