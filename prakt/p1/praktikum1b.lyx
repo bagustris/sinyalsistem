@@ -1,0 +1,541 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Praktikum 1 Sinyal Sistem
+\end_layout
+
+\begin_layout Author
+Bagus Tris Atmaja
+\end_layout
+
+\begin_layout Standard
+Tujuan :
+\end_layout
+
+\begin_layout Enumerate
+Mahasiswa memahami sifat-sifat dasar sistem LTI
+\end_layout
+
+\begin_layout Enumerate
+Mahasiswa mampu menentukan respon sistem: zero input, zero state, impulse
+ response, step response
+\end_layout
+
+\begin_layout Enumerate
+Mahasiswa mampu melakukan operasi konvolusi
+\end_layout
+
+\begin_layout Section
+Zero input respon sistem LTI 
+\end_layout
+
+\begin_layout Standard
+Tentukan zero-input response dari persamaan berikut,
+\end_layout
+
+\begin_layout Standard
+y[n] = y[n-1] + 2y[n-2] + x[n-2] 
+\end_layout
+
+\begin_layout Standard
+dimana x[n] = 4 cos [cos 
+\begin_inset Formula $\pi$
+\end_inset
+
+ n/8], y[0] = 1 dan y[1]=1.
+\end_layout
+
+\begin_layout Subsubsection*
+Matlab:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+y=[1 1];    % y(0)=1, y(1)=1 
+\end_layout
+
+\begin_layout Plain Layout
+
+x(1) = 4;      
+\end_layout
+
+\begin_layout Plain Layout
+
+x(2) = 4 *cos(pi/8);
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = 3:11;   %x(n)     
+\end_layout
+
+\begin_layout Plain Layout
+
+	n1 = n - 1;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	x(n) = 4*cos(pi*n1/8);     
+\end_layout
+
+\begin_layout Plain Layout
+
+	y(n) = y(n-1)+2*y(n-2)+x(n-2); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+stem(y); 
+\end_layout
+
+\begin_layout Plain Layout
+
+xlabel('n'); 
+\end_layout
+
+\begin_layout Plain Layout
+
+ylabel('y(n)'); 
+\end_layout
+
+\begin_layout Plain Layout
+
+title('system output y(n)');
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dari gambar response persamaan diatas, tentunya dengan mudah terlihat apakah
+ system yg ditinjau stabil/tidak stabil, bounded dan kausalitasnya.
+\end_layout
+
+\begin_layout Section
+Impulse Respon sistem LTI
+\end_layout
+
+\begin_layout Standard
+Tentukan output dari y(n), dimana 0 < n < 10 dari system LTI dengan input
+ x(n) = (0.8)
+\begin_inset Formula $^{n}$
+\end_inset
+
+ [u(n) - u(n-5)] dan impulse response h(n)= (0.5)
+\begin_inset Formula $^{n}$
+\end_inset
+
+ [u(n)- u(n-10)].
+\end_layout
+
+\begin_layout Subsection*
+Matlab:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+for n = 1:10     
+\end_layout
+
+\begin_layout Plain Layout
+
+	n1(n) = n-1;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	h(n) = (0.5)^n1(n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+for n = 1:5     
+\end_layout
+
+\begin_layout Plain Layout
+
+	n2(n) = n-1;     
+\end_layout
+
+\begin_layout Plain Layout
+
+	x(n) = (0.8)^n2(n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+y1 = conv (h,x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+y2 = conv (x,h);
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+n3 = length(n1)+length(n2)-1; 
+\end_layout
+
+\begin_layout Plain Layout
+
+n4 = 0:n3-1;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(4,1,1); stem(n1, x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(4,1,2); stem(n2, h); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(4,1,3); stem(n3, y1); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(4,1,4); stem(n3, y2);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Impulse Response LTI: Z-transform, Difference Eq, Filter
+\end_layout
+
+\begin_layout Standard
+Sebuah sistem kausal LTI memiliki hubungan input-output sebagai berikut,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y[n]\text{−}\frac{1}{4}y[n\text{−}1]\text{−}\frac{1}{8}y[n\text{−}2]=x[n\text{−}1]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+a) Hitung fungsi transfer 
+\begin_inset Formula $\frac{Y[z]}{X[z]}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+b) Tentukan impulse response-nya dari transormasi Z, dengan menggunakan
+ difference equation dan matlab routin 
+\begin_inset Quotes eld
+\end_inset
+
+filter
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Input dan Step Response
+\end_layout
+
+\begin_layout Standard
+Diberikian sebuah sistem sebagai berikut :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y(n)\text{−}y(n\text{−}1)+0.9y(n\text{−}2)=x(n)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Hitung dan gambar impulse response h(n) pada n=-20,...,100
+\end_layout
+
+\begin_layout Enumerate
+Hitung dan gambar step response u(n) pada n=-20,...,100
+\end_layout
+
+\begin_layout Enumerate
+Apakah sistem dengan impulse response h(n) stabil?
+\end_layout
+
+\begin_layout Subsection*
+Matlab
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+addpath('../../code') 
+\end_layout
+
+\begin_layout Plain Layout
+
+b = [1];            % num 
+\end_layout
+
+\begin_layout Plain Layout
+
+a=[1, -1, 0.9];     % denum 
+\end_layout
+
+\begin_layout Plain Layout
+
+n = [-20:120];      % time interval
+\end_layout
+
+\begin_layout Plain Layout
+
+% impulse response 
+\end_layout
+
+\begin_layout Plain Layout
+
+h = impz(b,a,n); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(2,1,1); stem(n,h); 
+\end_layout
+
+\begin_layout Plain Layout
+
+title('Impulse Response'); xlabel('n'); ylabel('h(n)')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% step response 
+\end_layout
+
+\begin_layout Plain Layout
+
+x = stepseq(0,-20,120); 
+\end_layout
+
+\begin_layout Plain Layout
+
+s = filter(b,a,x); 
+\end_layout
+
+\begin_layout Plain Layout
+
+subplot(2,1,2); stem(n,s) 
+\end_layout
+
+\begin_layout Plain Layout
+
+title('Step Response'); xlabel('n'); ylabel('s(n)')
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+% stability 
+\end_layout
+
+\begin_layout Plain Layout
+
+stable=sum(abs(h)) 
+\end_layout
+
+\begin_layout Plain Layout
+
+z=roots(a); 
+\end_layout
+
+\begin_layout Plain Layout
+
+magz=abs(z)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Tugas Praktikum
+\end_layout
+
+\begin_layout Enumerate
+Tentukan zero-state input persamaan dibawah ini 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+y[n+1] – 2y[n] = x[n] 
+\end_layout
+
+\begin_layout Enumerate
+y[n+2] – 1.56y[n+1] – 0.81 y[n] = x[n+1] + 3x[n] 
+\end_layout
+
+\begin_layout Enumerate
+y[n] – 0.6y[n-1] – 0.16y[n-2] = 5x[n] 
+\end_layout
+
+\begin_layout Standard
+Secara manual (hint : gunakan persamaan differential) dan memakai Matlab.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Konvolusikan ketiga persamaan diatas dengan (memakai Matlab) 
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+Dirinya sendiri 
+\end_layout
+
+\begin_layout Enumerate
+h[n] = x(n) = (0.9)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+\end_layout
+
+\begin_layout Enumerate
+h[n] = x(n) = (1.5)n[u(n)-u(n-15)]; dimana 0 < n < 15 
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+Kesimpulan apa yang diperoleh dari kedua percobaan diatas ?
+\end_layout
+
+\end_body
+\end_document

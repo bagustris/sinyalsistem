@@ -1,0 +1,6 @@
+Praktikum Sinyal Sistem, TF-ITS
+
+P1 - LTI, Zero-input, Echo Removal
+P2 - Konvolusi, FIR, Noise Removal
+P3 - Fourier, Fenomena Gibbs
+P4 - Windowing, Tranformasi
