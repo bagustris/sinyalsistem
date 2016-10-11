@@ -6,7 +6,7 @@
 
 addpath('../../code')
 b = [1];            % num
-a =[1, -1, 0.9];     % denum
+a =[1, -1, 0.9];    % denum
 n = [-20:120];      % time interval
 
 % impulse response

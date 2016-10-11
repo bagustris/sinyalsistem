@@ -1,4 +1,5 @@
-% Praktikum 2c : Speech enhancement
+% Praktikum 3c : Speech enhancement
+% bagus@ep.its.ac.id
 % Penerapan speech signal enhancement
 [Y, Fs] = wavread('../sinyal/aiueo.wav');
 
