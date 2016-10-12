@@ -16,7 +16,7 @@ x(2) = 4*cos(pi/8);
 for n = 3:21;   %x(n)
     n1 = n - 1;
     x(n) = 4*cos(pi*n/8);
-    y(n) = y(n-1)+2*y(n-2)+x(n-2); % comment x[n] for zero input
+    y(n) = y(n-1)+2*y(n-2) + x(n-2); % comment x[n] for zero input
 end
 
 stem(y);
