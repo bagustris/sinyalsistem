@@ -3,7 +3,7 @@
 ### Content: 
 
 - slide : berisi slide kuliah
-- code  : berisi code Matlab/Octave
+- code  : berisi code ~~matlab / Octave~~ python
 - pict  : berisi file-file gambar (.eps, .fig, .svg, etc)
 - prakt : berisi modul praktikum
 - sinyal: berisi contoh sinyal yang digunakan (suara, gambar, video)
